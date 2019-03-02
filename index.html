@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+            <meta charset="UTF-8">
+            <meta name="description" content="Free QR CODE GENERATOR AND DOWNLOADER. NOW YOU CAN GENERATE YOUR OWN QR CODE AND DOWNLOAD THEM TO SHARE THEM">
+            <meta name="keywords" content="QR CODE, amanasci, QRCODE.JS , AMAN KUMAR, XAM-X,XAM-X ACADEMY,LEARN">
+            <meta name="author" content="AMAN KUMAR(amanasci)">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
+        <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    
+
+       
+        <style>
+            html,body{
+                background: #2176ff;
+            }
+          .heading{
+            font-family: 'Permanent Marker', cursive;
+            margin-top: 50px;
+            margin-left: 550px;
+          }  
+          #headingtext{
+              font-family:'Permanent Marker', serif;
+              margin-left:590px;
+          }
+          .input{
+              margin-top: 150px;
+              margin-left: 550px;
+          }
+          #inputtext{
+              size: 25px;
+            border-radius: 25px;
+             
+          }
+          #qrcode {
+              margin-left: 550px;
+          }
+          #Download{
+              visibility: hidden;
+              margin-left:630px;
+          }
+        </style>
+    </head>
+    <body>
+            <div >
+                <H1 class="heading"> QR CODE GENERATOR </H1>
+                <span id="headingtext" >This is a webpage to easily create QR Codes.</span>
+            
+            </div>
+           <div class="input">
+               <input type="text" id="inputtext" placeholder="ENTER YOUR TEXT">
+               <button type="button" class="btn btn-outline-dark" onclick="makeCode()">GENERATE CODE</button>
+               <button type="button" class="btn btn-outline-dark" onclick="CLearFields()">CLEAR</button>
+           </div>
+
+           <br>
+
+           <div id="qrcode">
+                
+           </div>
+           <div id="Download">
+                <a id="download" download="MYQRCODE[by QR GENERATOR].png">
+                        <button class="btn btn-outline-dark" type="button" onClick="download()">Download</button>
+                        </a>
+           </div>
+           
+
+    </body>
+    <script>
+        var qrcode = new QRCode("qrcode");
+ 
+        function makeCode () {      
+     var elText = document.getElementById("inputtext");
+     console.log(elText.value);
+     
+     if (!elText.value) {
+         alert("Input a text");
+         elText.focus();
+         return;
+     }
+     
+     qrcode.makeCode(elText.value);
+     setTimeout(function(){
+        var download = document.getElementById("download");
+        var mycanvas=document.getElementsByTagName("canvas");
+        var data=mycanvas[0].toDataURL("image/png").replace("image/png", "image/octet-stream");
+        download.setAttribute("href",data);
+        document.getElementById("Download").style.visibility = "visible"; 
+        
+}, 500);
+
+        }
+
+    function ClearFields() {
+
+    document.getElementById("inputtext").value = "";
+}
+ 
+    </script>
+</html>
